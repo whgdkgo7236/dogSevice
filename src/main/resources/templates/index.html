@@ -11,18 +11,19 @@
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#!">Start Bootstrap</a>
+        <a class="navbar-brand" href="/">Dog Food</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-trem"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="shopping_btn()">쇼핑</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -33,22 +34,29 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+            <form class="d-shop item" name="addshopitem-btn" action="/food/save" method="get">
+                <button class="btn btn-outline-dark" id="additem_btn" onclick="saveitem_btn()">
                     <i class="bi-cart-fill me-1"></i>
-                    Cart
+                    물품추가
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
-            <form class="d-login">
-                <button class="btn btn-outline-dark" type="submit">
+            <form class="d-flex" name="detail_btn" action="/member/detail" method="get">
+                <button class="btn btn-outline-dark" onclick="detail_btn()">
+                    <i class="bi-cart-fill me-1"></i>
+                    마이페이지
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+            <form class="d-login" name="memberswitch_btn" action="/member/login" method="get">
+                <button class="btn btn-outline-dark" id="member_btn" onclick="membertrigger_btn()">
                     <i class="bi bi-file-person-fill"></i>
-                    Login
+                    Login/logout
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
-            <form action="/member/save" method="get" class="d-save">
-                <button class="btn btn-outline-dark" type="submit">
+            <form action="/member/save" method="get" name = "save_btn" class="d-save">
+                <button class="btn btn-outline-dark" id="save_btn" onclick="savefunction()">
                     <i class="bi bi-plus-lg"></i>
                     Create
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -278,6 +286,57 @@
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="/js/save.js"></script>
+
 </body>
+<script>
+    const member_btn = document.getElementById("member_btn");
+    const save_btn = document.getElementById("save_btn");
+
+    const session_id= "[[${sessionid}]]";
+    const additem_btn = document.getElementById("additem_btn");
+    console.log(session_id);
+    if(session_id=="null"||session_id==null||session_id==""){
+
+            member_btn.style.visibility = "visible";
+            member_btn.innerHTML = "로그인";
+            save_btn.style.visibility = "visible";
+            save_btn.innerHTML ="회원가입";
+             additem_btn.style.visibility = "hidden";
+    }else{
+
+        member_btn.style.visibility = "visible";
+        member_btn.innerHTML = "로그아웃";
+        save_btn.style.visibility = "hidden";
+        save_btn.innerHTML = "회원가입";
+        if(session_id=="admin"){
+            additem_btn.style.visibility="visible";
+        }else{
+            additem_btn.style.visibility="hidden";
+        }
+    }
+
+    function saveitem_btn(){
+        addshopitem-btn.submit();
+    }
+    function savefunction(){
+        //save_btn.submit();
+        $(".d-save").submit();
+    }
+    function membertrigger_btn(){
+        if(session_id=="null"||session_id==null||session_id==""){
+            memberswitch_btn.submit();
+            console.log("login");
+        }else{
+            location.href="/member/logout";
+        }
+    }
+    function detail_btn(){
+        detail_btn.submit();
+    }
+    function shopping_btn(){
+        console.log("쇼핑버튼");
+        location.href="/food/main";
+    }
+</script>
 </html>

@@ -76,18 +76,18 @@
     </div>
 </header>
 <!-- Section-->
-<div class="text-center">
-    <form action="/member/save" method="post" name="saveForm">
-        아이디 : <input type="text" name="mId" id="m_id"><br>
-        <span id="idcheck"></span><br>
-        비밀번호 : <input type="text" name="mPassword"><br>
-        이름 : <input type="text" name="mName"><br>
-        주소 : <input type="text" name="mAddress"><br>
-        이메일 : <input type="text" name="mEmail"><br>
-        핸드폰번호 : <input type="text" name="mPhonenum"><br>
-        <input type="button" value="가입하기" th:onclick="membersave_btn()"><br>
-    </form>
-</div>
+
+<form action="/member/detail" method="post" name="detailForm">
+    <input type="hidden" name="mIdnum" th:value="${detailDTO.MIdnum}">
+    아이디 : <input type="text" name="mId" id="m_id" th:value="${detailDTO.MId}" readonly><br>
+    <span id="idcheck"></span><br>
+    비밀번호 : <input type="text" name="mPassword"><br>
+    이름 : <input type="text" name="mName" th:value="${detailDTO.MName}" readonly><br>
+    주소 : <input type="text" name="mAddress" th:value="${detailDTO.MAddress}"><br>
+    이메일 : <input type="text" name="mEmail" th:value="${detailDTO.MEmail}"><br>
+    핸드폰번호 : <input type="text" name="mPhonenum" th:value="${detailDTO.MPhonenum}"><br>
+    <input type="button" value="가입하기" onclick="detail_btn()"><br>
+</form>
 
 <!-- Footer-->
 <footer class="py-5 bg-dark">
@@ -151,10 +151,11 @@
     function loginform_btn(){
         loginform.submit();
     }
-    function membersave_btn(){
-        console.log("회원가입");
+    function save_btn(){
         saveForm.submit();
     }
-
+    function detail_btn(){
+        detailForm.submit();
+    }
 </script>
 </html>

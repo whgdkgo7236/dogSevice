@@ -77,15 +77,10 @@
 </header>
 <!-- Section-->
 <div class="text-center">
-    <form action="/member/save" method="post" name="saveForm">
-        아이디 : <input type="text" name="mId" id="m_id"><br>
-        <span id="idcheck"></span><br>
-        비밀번호 : <input type="text" name="mPassword"><br>
-        이름 : <input type="text" name="mName"><br>
-        주소 : <input type="text" name="mAddress"><br>
-        이메일 : <input type="text" name="mEmail"><br>
-        핸드폰번호 : <input type="text" name="mPhonenum"><br>
-        <input type="button" value="가입하기" th:onclick="membersave_btn()"><br>
+    <form name="loginform" action="/member/login" method="post">
+        아이디  : <input type="text" name="mId" placeholder="아이디를 입력해주세요"><br>
+        비밀번호 : <input type="text" name="mPassword" placeholder="비밀번호를 입력해주세요"><br>
+        <button onclick="loginform_btn()">로그인</button>
     </form>
 </div>
 
@@ -151,10 +146,8 @@
     function loginform_btn(){
         loginform.submit();
     }
-    function membersave_btn(){
-        console.log("회원가입");
-        saveForm.submit();
-    }
 
 </script>
 </html>
+
+

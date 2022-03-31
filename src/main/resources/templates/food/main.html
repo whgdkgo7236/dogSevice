@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -34,7 +34,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-shop item" name="addshopitem-btn" action="/shop/save" method="get">
+            <form class="d-shop item" name="addshopitem-btn" action="/food/save" method="get">
                 <button class="btn btn-outline-dark" id="additem_btn" onclick="saveitem_btn()">
                     <i class="bi-cart-fill me-1"></i>
                     물품추가
@@ -68,27 +68,78 @@
     </div>
 </nav>
 <!-- Header-->
-<header class="bg-white py-5">
+<header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">DogFood</h1>
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Shop in style</h1>
+            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
         </div>
     </div>
 </header>
 <!-- Section-->
-<div class="text-center">
-    <form action="/member/save" method="post" name="saveForm">
-        아이디 : <input type="text" name="mId" id="m_id"><br>
-        <span id="idcheck"></span><br>
-        비밀번호 : <input type="text" name="mPassword"><br>
-        이름 : <input type="text" name="mName"><br>
-        주소 : <input type="text" name="mAddress"><br>
-        이메일 : <input type="text" name="mEmail"><br>
-        핸드폰번호 : <input type="text" name="mPhonenum"><br>
-        <input type="button" value="가입하기" th:onclick="membersave_btn()"><br>
-    </form>
-</div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+             <div th:each="food: ${foodList}">
+                <div class="col mb-5">
+                    <div class="card h-100" >
+                        <!-- Product image-->
+                        <img class="card-img-top" th:src="@{/image/}+${food.fImagefilename}" th:width="160" th:height="200" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder" th:text="${food.fTitle}">Fancy Product</h5>
+                                <!-- Product price-->
+                                <h7 class="food-price" th:text="${food.fCost}"></h7>
 
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{|/food/${food.fIdnum}|}">상세정보</a></div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+
+</section>
+<table>
+    <tr>
+        <th class="page-item">
+            <a class="page-link" th:href="@{/food/(main=1)}">
+                <span>First</span>
+            </a>
+        </th>
+
+        <th th:class="${foodList.first} ? 'disabled'" class="page-item">
+
+            <a class="page-link" th:href="${foodList.first} ? '#' : @{/food/(page=${foodList.number})}">
+                <span>&lt;</span>
+            </a>
+        </th>
+
+        <th th:each="page: ${#numbers.sequence(startPage, endPage)}"
+            th:class="${page == foodList.number + 1} ? 'active'" class="page-item">
+            <a class="page-link" th:text="${page}" th:href="@{/food/(main=${page})}"></a>
+        </th>
+
+        <th th:class="${foodList.last} ? 'disabled'">
+            <a class="page-link" th:href="${foodList.last} ? '#' : @{/food/(main=${foodList.number + 2})}">
+                <span>&gt;</span>
+            </a>
+        </th>
+
+        <th class="page-item">
+            <a class="page-link" th:href="@{food/(main=${foodList.totalPages})}">
+                <span>Last</span>
+            </a>
+        </th>
+    </tr>
+</table>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
@@ -146,15 +197,7 @@
     }
     function shopping_btn(){
         console.log("쇼핑버튼");
-        location.href="/shop/main";
+        location.href="/food/main";
     }
-    function loginform_btn(){
-        loginform.submit();
-    }
-    function membersave_btn(){
-        console.log("회원가입");
-        saveForm.submit();
-    }
-
 </script>
 </html>

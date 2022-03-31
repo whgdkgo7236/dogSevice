@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -76,19 +76,39 @@
     </div>
 </header>
 <!-- Section-->
-<div class="text-center">
-    <form action="/member/save" method="post" name="saveForm">
-        아이디 : <input type="text" name="mId" id="m_id"><br>
-        <span id="idcheck"></span><br>
-        비밀번호 : <input type="text" name="mPassword"><br>
-        이름 : <input type="text" name="mName"><br>
-        주소 : <input type="text" name="mAddress"><br>
-        이메일 : <input type="text" name="mEmail"><br>
-        핸드폰번호 : <input type="text" name="mPhonenum"><br>
-        <input type="button" value="가입하기" th:onclick="membersave_btn()"><br>
-    </form>
-</div>
+<section>
+    <a th:text="${food.FTitle}"></a>
+    <table>
+        <tr class="justify-cintent-center">
+            <th><img th:src="@{/image/}+${food.FImagefilename}" th:width="350" th:height="450" th:alt="이미지오류"></th>
+            <th><a th:text="${food.FContents}"></a></th>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a th:text="|가격 : ${food.FCost} 원|"></a></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <form action="/trade/save" method="post" name="foodbuyform">
+                    <input type="hidden" name="FIdnum" th:value="${food.FIdnum}">
+                </form>
+                    <input type="button" onclick="foodbuy_btn()" th:value="구매하기">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <form action="/food/delete" method="post" name="fooddeleteform">
+                    <input type="hidden" name="FIdnum" th:value="${food.FIdnum}">
+                </form>
+                <input type="button" onclick="fooddelete_btn()" id="delete_btn" th:value="삭제">
+            </td>
 
+        </tr>
+    </table>
+
+</section>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
@@ -102,7 +122,7 @@
 <script>
     const member_btn = document.getElementById("member_btn");
     const save_btn = document.getElementById("save_btn");
-
+    const fooddelete_btn = document.getElementById("delete_btn");
     const session_id= "[[${sessionid}]]";
     const additem_btn = document.getElementById("additem_btn");
     console.log(session_id);
@@ -113,16 +133,20 @@
         save_btn.style.visibility = "visible";
         save_btn.innerHTML ="회원가입";
         additem_btn.style.visibility = "hidden";
+        fooddelete_btn.style.visibility = "hidden";
     }else{
 
         member_btn.style.visibility = "visible";
         member_btn.innerHTML = "로그아웃";
         save_btn.style.visibility = "hidden";
         save_btn.innerHTML = "회원가입";
+        fooddelete_btn.style.visibility = "hidden";
         if(session_id=="admin"){
             additem_btn.style.visibility="visible";
+            fooddelete_btn.style.visibility = "visible";
         }else{
             additem_btn.style.visibility="hidden";
+            fooddelete_btn.style.visibility = "hidden";
         }
     }
 
@@ -148,13 +172,17 @@
         console.log("쇼핑버튼");
         location.href="/shop/main";
     }
+    /*
     function loginform_btn(){
         loginform.submit();
     }
-    function membersave_btn(){
-        console.log("회원가입");
-        saveForm.submit();
+   */
+    function foodbuy_btn(){
+        foodbuyform.submit();
     }
-
+    function fooddelete_btn(){
+        fooddeleteform.submit();
+    }
 </script>
 </html>
+

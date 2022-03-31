@@ -77,16 +77,16 @@
 </header>
 <!-- Section-->
 <div class="text-center">
-    <form action="/member/save" method="post" name="saveForm">
-        아이디 : <input type="text" name="mId" id="m_id"><br>
-        <span id="idcheck"></span><br>
-        비밀번호 : <input type="text" name="mPassword"><br>
-        이름 : <input type="text" name="mName"><br>
-        주소 : <input type="text" name="mAddress"><br>
-        이메일 : <input type="text" name="mEmail"><br>
-        핸드폰번호 : <input type="text" name="mPhonenum"><br>
-        <input type="button" value="가입하기" th:onclick="membersave_btn()"><br>
+    <form action="/food/save" method="post" name="foodsaveForm" enctype="multipart/form-data">
+        제목 : <input type="text" name="fTitle" id="fTitle"><br>
+        내용 : <textarea name="fContents" cols="30" rows="5"></textarea><br>
+        가격 : <input type="text" name="fCost"><br>
+        담당자번호 : <input type="text" name="fPhonenum"><br>
+        이미지파일 : <input type="file" name="fImagefile"><br>
+        <input type="button" value="등록" onclick="foodsave_btn()"><br>
     </form>
+
+
 </div>
 
 <!-- Footer-->
@@ -146,15 +146,18 @@
     }
     function shopping_btn(){
         console.log("쇼핑버튼");
-        location.href="/shop/main";
+        location.href="/food/main";
     }
+    /*
     function loginform_btn(){
         loginform.submit();
     }
-    function membersave_btn(){
-        console.log("회원가입");
-        saveForm.submit();
-    }
+   */
+    function foodsave_btn(){
+        console.log("shopbtn");
 
+        foodsaveForm.submit();
+    }
 </script>
 </html>
+
