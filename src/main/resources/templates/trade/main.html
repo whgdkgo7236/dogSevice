@@ -84,68 +84,24 @@
     </div>
 </header>
 <!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-             <div th:each="food: ${foodList}">
-                <div class="col mb-5">
-                    <div class="card h-100" >
-                        <!-- Product image-->
-                        <img class="card-img-top" th:src="@{/image/}+${food.fImagefilename}" th:width="160" th:height="200" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder" th:text="${food.fTitle}">Fancy Product</h5>
-                                <!-- Product price-->
-                                <h7 class="food-price" th:text="${food.fCost}"></h7>
-
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{|/food/${food.fIdnum}|}">상세정보</a></div>
-                        </div>
-                    </div>
-                </div>
-             </div>
-        </div>
-    </div>
-
-
-</section>
 <table>
     <tr>
-        <th class="page-item">
-            <a class="page-link" th:href="@{/food/main/(page=1)}">
-                <span>First</span>
-            </a>
-        </th>
+        <th>거래번호</th>
+        <th>간식이름</th>
+        <th>간식이미지</th>
+        <th>간식가격</th>
+        <th>회사번호</th>
 
-        <th th:class="${foodList.first} ? 'disabled'" class="page-item">
-
-            <a class="page-link" th:href="${foodList.first} ? '#' : @{/food/main/(page=${foodList.number})}">
-                <span>&lt;</span>
-            </a>
-        </th>
-
-        <th th:each="page: ${#numbers.sequence(startPage, endPage)}"
-            th:class="${page == foodList.number + 1} ? 'active'" class="page-item">
-            <a class="page-link" th:text="${page}" th:href="@{/food/main/(page=${page})}"></a>
-        </th>
-
-        <th th:class="${foodList.last} ? 'disabled'">
-            <a class="page-link" th:href="${foodList.last} ? '#' : @{/food/main/(main=${foodList.number + 2})}">
-                <span>&gt;</span>
-            </a>
-        </th>
-
-        <th class="page-item">
-            <a class="page-link" th:href="@{food/main/(page=${foodList.totalPages})}">
-                <span>Last</span>
-            </a>
-        </th>
     </tr>
+    <tr th:each="food: ${pagingList}">
+        <td><a th:value="${food.TIdnum}"></a></td>
+        <td><a th:value="${food.FTitle}"></a></td>
+        <td><img th:src="@{/image/}+${food.FImagefilename}" th:width="150" th:height="190" th:alt="이미지오류"></td>
+        <td><a th:value="${food.FCost}"></a></td>
+        <td><a th:value="${food.FPhonenum}"></a></td>
+        <td><a th:text="삭제" th:href="@{|/trade/delete/${food.TIdnum}|}"></a></td>
+    </tr>
+
 </table>
 <!-- Footer-->
 <footer class="py-5 bg-dark">
