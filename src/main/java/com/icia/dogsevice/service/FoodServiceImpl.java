@@ -24,7 +24,7 @@ import java.util.Optional;
 public class FoodServiceImpl implements FoodService{
     private final FoodRepository fr;
 
-    public static final int PAGE_LIMIT =3;
+    public static final int PAGE_LIMIT =4;
     @Override
     public void save(FoodSaveDTO foodSaveDTO) throws IOException {
         MultipartFile file = foodSaveDTO.getFImagefile();

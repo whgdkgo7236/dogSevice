@@ -24,15 +24,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-trem"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                 <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="shopping_btn()">쇼핑</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Products</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                    </ul>
-                </li>
+
             </ul>
             <form class="d-trade check" name="tradeitem-btn" action="/trade/" method="get">
                 <button class="btn btn-outline-dark" id="trademain_btn" onclick="tradeform_btn()">
@@ -75,11 +67,10 @@
     </div>
 </nav>
 <!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+<header class="bg-white">
+    <div class="container px-4 px-lg-5 my-2">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+            <img th:src="@{/image/DogFood.png}" th:width="1100" th:height="510"  th:alt="이미지오류">
         </div>
     </div>
 </header>

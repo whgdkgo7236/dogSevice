@@ -24,15 +24,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-trem"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                 <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="shopping_btn()">쇼핑</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Products</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                    </ul>
-                </li>
+
             </ul>
             <form class="d-shop item" name="addshopitem-btn" action="/shop/save" method="get">
                 <button class="btn btn-outline-dark" id="additem_btn" onclick="saveitem_btn()">
@@ -77,15 +69,17 @@
 </header>
 <!-- Section-->
 <section>
-    <a th:text="${food.FTitle}"></a>
-    <table>
-        <tr class="justify-cintent-center">
-            <th><img th:src="@{/image/}+${food.FImagefilename}" th:width="350" th:height="450" th:alt="이미지오류"></th>
+    <div class="container px-2 px-lg-3 my-2 text-center font-weight-bold">
+    <h1  th:text="${food.FTitle}"></h1>
+    </div>
+    <table class="container ">
+        <tr >
+            <th><img th:src="@{/image/}+${food.FImagefilename}" th:width="450" th:height="550" th:alt="이미지오류"></th>
             <th><a th:text="${food.FContents}"></a></th>
         </tr>
         <tr>
             <td></td>
-            <td><a th:text="|가격 : ${food.FCost} 원|"></a></td>
+            <td><h3 th:text="|가격 : ${food.FCost} 원|"></h3></td>
         </tr>
         <tr>
             <td></td>
@@ -93,7 +87,7 @@
                 <form action="/trade/save" method="post" name="foodbuyform">
                     <input type="hidden" name="FIdnum" th:value="${food.FIdnum}">
                 </form>
-                    <input type="button" onclick="foodbuy_btn()" th:value="구매하기">
+                    <input type="button" style="width: 130pt;height: 40pt" onclick="foodbuy_btn()" th:value="구매하기">
             </td>
         </tr>
         <tr>
@@ -102,7 +96,7 @@
                 <form action="/food/delete" method="post" name="fooddeleteform">
                     <input type="hidden" name="FIdnum" th:value="${food.FIdnum}">
                 </form>
-                <input type="button" onclick="fooddelete_btn()" id="delete_btn" th:value="삭제">
+                <input type="button" style="width: 130pt" onclick="fooddelete_btn()" id="delete_btn" th:value="삭제">
             </td>
 
         </tr>
@@ -122,7 +116,7 @@
 <script>
     const member_btn = document.getElementById("member_btn");
     const save_btn = document.getElementById("save_btn");
-    const fooddelete_btn = document.getElementById("delete_btn");
+    const food_delete_btn = document.getElementById("delete_btn");
     const session_id= "[[${sessionid}]]";
     const additem_btn = document.getElementById("additem_btn");
     console.log(session_id);
@@ -133,20 +127,20 @@
         save_btn.style.visibility = "visible";
         save_btn.innerHTML ="회원가입";
         additem_btn.style.visibility = "hidden";
-        fooddelete_btn.style.visibility = "hidden";
+        food_delete_btn.style.visibility = "hidden";
     }else{
 
         member_btn.style.visibility = "visible";
         member_btn.innerHTML = "로그아웃";
         save_btn.style.visibility = "hidden";
         save_btn.innerHTML = "회원가입";
-        fooddelete_btn.style.visibility = "hidden";
+        food_delete_btn.style.visibility = "hidden";
         if(session_id=="admin"){
             additem_btn.style.visibility="visible";
-            fooddelete_btn.style.visibility = "visible";
+            food_delete_btn.style.visibility = "visible";
         }else{
             additem_btn.style.visibility="hidden";
-            fooddelete_btn.style.visibility = "hidden";
+            food_delete_btn.style.visibility = "hidden";
         }
     }
 
@@ -170,7 +164,7 @@
     }
     function shopping_btn(){
         console.log("쇼핑버튼");
-        location.href="/shop/main";
+        location.href="/food/main";
     }
     /*
     function loginform_btn(){

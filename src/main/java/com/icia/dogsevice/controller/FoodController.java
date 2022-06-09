@@ -24,7 +24,7 @@ public class FoodController {
     private final FoodService fs;
     private final MemberService ms;
 
-    public static final int BLOCK_LIMIT =3;
+    public static final int BLOCK_LIMIT =8;
 
     @GetMapping("main")
     public String mainForm(Model model, @PageableDefault(page =1)Pageable pageable){
