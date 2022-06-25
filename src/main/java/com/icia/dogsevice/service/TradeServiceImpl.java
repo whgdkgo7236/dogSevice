@@ -1,8 +1,6 @@
 package com.icia.dogsevice.service;
 
-import com.icia.dogsevice.dto.FoodPagingDTO;
-import com.icia.dogsevice.dto.TradePagingDTO;
-import com.icia.dogsevice.dto.TradeSaveDTO;
+import com.icia.dogsevice.dto.*;
 import com.icia.dogsevice.entity.MemberEntity;
 import com.icia.dogsevice.entity.TradeEntity;
 import com.icia.dogsevice.repository.MemberRepository;
@@ -13,6 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class TradeServiceImpl implements TradeService{
     private final MemberService ms;
 
     public static final int PAGE_LIMIT =3;
+    public static final int PAGE_LIMIT_MYLIST =8;
     @Override
     public void save(TradeSaveDTO toDTOChange) {
         toDTOChange.setMMemberentity(MemberEntity.toDetailEntity(ms.findBySessionid()));
@@ -50,4 +52,25 @@ public class TradeServiceImpl implements TradeService{
     public void deleteId(Long tIdnum) {
         tr.deleteById(tIdnum);
     }
+/*
+    @Override
+    public List<TradeListDTO> findAllListbyId() {
+
+
+        List<TradeListDTO> ListDTO = null;
+
+        List<TradeEntity> tradeEntities = tr.findByMId(ms.getSessionId());
+        System.out.println(tradeEntities);
+
+        for(int i =0 ; i < tradeEntities.size();i++){
+            ListDTO.add(TradeListDTO.toDTOChange(tradeEntities[i])) ;
+        }
+
+
+        return ListDTO;
+    }
+
+
+ */
+
 }

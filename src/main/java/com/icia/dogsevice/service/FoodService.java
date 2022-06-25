@@ -3,6 +3,7 @@ package com.icia.dogsevice.service;
 import com.icia.dogsevice.dto.FoodDetailDTO;
 import com.icia.dogsevice.dto.FoodPagingDTO;
 import com.icia.dogsevice.dto.FoodSaveDTO;
+import com.icia.dogsevice.dto.MemberDetailDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,4 +19,6 @@ public interface FoodService {
     FoodDetailDTO findByIdnum(Long fIdnum);
 
     void deleteByIdnum(Long fIdnum);
+
+
 }

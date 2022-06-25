@@ -69,13 +69,14 @@
 </header>
 <!-- Section-->
 <section>
-    <div class="container px-2 px-lg-3 my-2 text-center font-weight-bold">
+    <div class="container text-center font-weight-bold">
     <h1  th:text="${food.FTitle}"></h1>
     </div>
-    <table class="container ">
-        <tr >
-            <th><img th:src="@{/image/}+${food.FImagefilename}" th:width="450" th:height="550" th:alt="이미지오류"></th>
-            <th><a th:text="${food.FContents}"></a></th>
+    <table class="container my-5">
+        <tr>
+            <th><div class="offset-2"><img th:src="@{/image/}+${food.FImagefilename}" th:width="520" th:height="630" th:alt="이미지오류"></div></th>
+            <th style="vertical-align: top"><a th:text="${food.FContents}"></a></th>
+
         </tr>
         <tr>
             <td></td>
@@ -104,7 +105,7 @@
 
 </section>
 <!-- Footer-->
-<footer class="py-5 bg-dark">
+<footer class="my-4 py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
 <!-- Bootstrap core JS-->

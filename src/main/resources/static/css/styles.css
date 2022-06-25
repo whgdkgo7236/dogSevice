@@ -11285,4 +11285,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+  detail-text{
+    vertical-align: top !important;
+  }
 }

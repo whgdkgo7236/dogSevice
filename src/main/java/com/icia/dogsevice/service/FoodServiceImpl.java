@@ -4,7 +4,9 @@ import com.icia.dogsevice.dto.FoodDetailDTO;
 import com.icia.dogsevice.dto.FoodPagingDTO;
 import com.icia.dogsevice.dto.FoodSaveDTO;
 
+import com.icia.dogsevice.dto.MemberDetailDTO;
 import com.icia.dogsevice.entity.FoodEntity;
+import com.icia.dogsevice.entity.MemberEntity;
 import com.icia.dogsevice.repository.FoodRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,7 +26,7 @@ import java.util.Optional;
 public class FoodServiceImpl implements FoodService{
     private final FoodRepository fr;
 
-    public static final int PAGE_LIMIT =4;
+    public static final int PAGE_LIMIT =8;
     @Override
     public void save(FoodSaveDTO foodSaveDTO) throws IOException {
         MultipartFile file = foodSaveDTO.getFImagefile();
@@ -68,4 +70,6 @@ public class FoodServiceImpl implements FoodService{
     public void deleteByIdnum(Long fIdnum) {
         fr.deleteById(fIdnum);
     }
+
+
 }

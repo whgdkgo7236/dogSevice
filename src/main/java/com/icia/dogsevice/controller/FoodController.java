@@ -24,7 +24,7 @@ public class FoodController {
     private final FoodService fs;
     private final MemberService ms;
 
-    public static final int BLOCK_LIMIT =8;
+    public static final int BLOCK_LIMIT =4;
 
     @GetMapping("main")
     public String mainForm(Model model, @PageableDefault(page =1)Pageable pageable){
@@ -34,6 +34,7 @@ public class FoodController {
         //paging
         Page<FoodPagingDTO> foodList= fs.paging(pageable);
         model.addAttribute("foodList",foodList);
+        System.out.println(foodList);
 
         int startPage=(((int)(Math.ceil((double) pageable.getPageNumber()/BLOCK_LIMIT)))-1)*BLOCK_LIMIT+1;
         int endPage = ((startPage + BLOCK_LIMIT -1)< foodList.getTotalPages()) ? startPage + BLOCK_LIMIT -1 : foodList.getTotalPages();

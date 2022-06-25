@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         LoginInterceptor loginInterceptor = new LoginInterceptor();
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/member/detail","/food/detail","/trade/save") //추가할 주소
+                .addPathPatterns("/member/detail","/food/detail","/trade/save","/member/myfood") //추가할 주소
                 .excludePathPatterns(); //예외할주소
     }
 

@@ -24,15 +24,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-trem"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
                 <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="shopping_btn()">쇼핑</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Products</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                    </ul>
-                </li>
+
             </ul>
             <form class="d-shop item" name="addshopitem-btn" action="/shop/save" method="get">
                 <button class="btn btn-outline-dark" id="additem_btn" onclick="saveitem_btn()">
@@ -76,7 +68,7 @@
     </div>
 </header>
 <!-- Section-->
-
+<div class="text-center">
 <form action="/member/detail" method="post" name="detailForm">
     <input type="hidden" name="mIdnum" th:value="${detailDTO.MIdnum}">
     아이디 : <input type="text" name="mId" id="m_id" th:value="${detailDTO.MId}" readonly><br>
@@ -88,9 +80,9 @@
     핸드폰번호 : <input type="text" name="mPhonenum" th:value="${detailDTO.MPhonenum}"><br>
     <input type="button" value="가입하기" onclick="detail_btn()"><br>
 </form>
-
+</div>
 <!-- Footer-->
-<footer class="py-5 bg-dark">
+<footer class="my-4 py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
 </footer>
 <!-- Bootstrap core JS-->
@@ -146,12 +138,12 @@
     }
     function shopping_btn(){
         console.log("쇼핑버튼");
-        location.href="/shop/main";
+        location.href="/food/main";
     }
     function loginform_btn(){
         loginform.submit();
     }
-    function save_btn(){
+    function func_save_btn(){
         saveForm.submit();
     }
     function detail_btn(){
