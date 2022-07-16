@@ -22,9 +22,10 @@ public class TradeListDTO {
     private String fImagefilename;
     private String fImagefilepath;
     private MemberEntity mMemberentity;
-/*
-    public static TradeSaveDTO toDTOChange(TradeEntity tradeDTO) {
-        TradeSaveDTO DTO = new TradeSaveDTO();
+
+    public static TradeListDTO toDTOChange(TradeEntity tradeDTO) {
+        TradeListDTO DTO = new TradeListDTO();
+        DTO.setTIdnum(tradeDTO.getTIdnum());
         DTO.setFIdnum(tradeDTO.getFIdnum());
         DTO.setFTitle(tradeDTO.getFTitle());
         DTO.setFContents(tradeDTO.getFContents());
@@ -32,10 +33,11 @@ public class TradeListDTO {
         DTO.setFPhonenum(tradeDTO.getFPhonenum());
         DTO.setFImagefilename(tradeDTO.getFImagefilename());
         DTO.setFImagefilepath(tradeDTO.getFImagefilepath());
+        DTO.setMMemberentity(tradeDTO.getMemberEntity());
 
         return DTO;
 
     }
 
- */
+
 }

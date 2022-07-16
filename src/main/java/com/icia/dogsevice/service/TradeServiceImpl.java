@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,25 +54,33 @@ public class TradeServiceImpl implements TradeService{
     public void deleteId(Long tIdnum) {
         tr.deleteById(tIdnum);
     }
-/*
+
     @Override
     public List<TradeListDTO> findAllListbyId() {
 
-
-        List<TradeListDTO> ListDTO = null;
-
-        List<TradeEntity> tradeEntities = tr.findByMId(ms.getSessionId());
-        System.out.println(tradeEntities);
-
+        System.out.println("시작 ");
+        ArrayList<TradeListDTO> ListDTO = new ArrayList<>();
+        System.out.println("ListDTO 문제 ");
+        System.out.println("맴버 아이디 :  "+ ms.findBySessionid().getMIdnum());
+        List<TradeEntity> tradeEntities =  tr.findBymemberEntity(MemberEntity.toDetailEntity(ms.findBySessionid()));
+        System.out.println("장바구니 갯수 :  "+ tradeEntities.size());
+        for(int i =0;i< tradeEntities.size();i++) {
+            System.out.println("Optional 의 값  =  " + tradeEntities.get(i).getFTitle());
+            TradeListDTO tradeDTO = TradeListDTO.toDTOChange(tradeEntities.get(i));
+            System.out.println(tradeDTO);
+            ListDTO.add(i,tradeDTO);
+            System.out.println(ListDTO.get(i));
+        }
+/*
         for(int i =0 ; i < tradeEntities.size();i++){
             ListDTO.add(TradeListDTO.toDTOChange(tradeEntities[i])) ;
         }
-
+*/
 
         return ListDTO;
     }
 
 
- */
+
 
 }

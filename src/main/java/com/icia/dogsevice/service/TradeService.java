@@ -16,6 +16,5 @@ public interface TradeService {
 
     void deleteId(Long tIdnum);
 
-
-   // List<TradeListDTO> findAllListbyId();
+     List<TradeListDTO> findAllListbyId();
 }

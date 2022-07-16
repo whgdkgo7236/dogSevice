@@ -33,6 +33,13 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+            <form class="d-mylist" name="myitemlist-btn" action="/member/trade" method="get">
+                <button class="btn btn-outline-dark"  onclick="mylist_btn()">
+                    <i class="bi-cart-fill me-1"></i>
+                    장바구니
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
 
             <form class="d-flex" name="detail-btn" action="/member/detail" method="get">
                 <button class="btn btn-outline-dark" onclick="detail_btn()">
@@ -188,8 +195,8 @@
         console.log("쇼핑버튼");
         location.href="/food/main";
     }
-    function myfoodbtn(){
-        myfood_btn.submit();
+    function mylist_btn(){
+        myitemlist-btn.submit();
     }
 </script>
 </html>

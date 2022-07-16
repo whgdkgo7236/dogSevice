@@ -80,10 +80,12 @@ public class MemberController {
 
         return "index";
     }
-    /*
+
     @GetMapping("trade")
     public String myfood(Model model){
+        System.out.println("맴버컨트롤 ");
         List<TradeListDTO> tList= ts.findAllListbyId();
+        System.out.println("tList = "+tList);
         model.addAttribute("tList",tList);
 
 
@@ -93,7 +95,7 @@ public class MemberController {
         return "/member/myfood";
     }
 
-     */
+
 }
 
 
