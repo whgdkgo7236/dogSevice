@@ -44,7 +44,10 @@ public class TradeServiceImpl implements TradeService{
                         trade.getFCost(),
                         trade.getFPhonenum(),
                         trade.getFImagefilename(),
-                        trade.getFImagefilepath())
+                        trade.getFImagefilepath(),
+                        trade.getMemberEntity())
+
+
         );
 
         return tradeList;
@@ -58,24 +61,15 @@ public class TradeServiceImpl implements TradeService{
     @Override
     public List<TradeListDTO> findAllListbyId() {
 
-        System.out.println("시작 ");
+
         ArrayList<TradeListDTO> ListDTO = new ArrayList<>();
-        System.out.println("ListDTO 문제 ");
-        System.out.println("맴버 아이디 :  "+ ms.findBySessionid().getMIdnum());
+
         List<TradeEntity> tradeEntities =  tr.findBymemberEntity(MemberEntity.toDetailEntity(ms.findBySessionid()));
-        System.out.println("장바구니 갯수 :  "+ tradeEntities.size());
+
         for(int i =0;i< tradeEntities.size();i++) {
-            System.out.println("Optional 의 값  =  " + tradeEntities.get(i).getFTitle());
             TradeListDTO tradeDTO = TradeListDTO.toDTOChange(tradeEntities.get(i));
-            System.out.println(tradeDTO);
             ListDTO.add(i,tradeDTO);
-            System.out.println(ListDTO.get(i));
         }
-/*
-        for(int i =0 ; i < tradeEntities.size();i++){
-            ListDTO.add(TradeListDTO.toDTOChange(tradeEntities[i])) ;
-        }
-*/
 
         return ListDTO;
     }

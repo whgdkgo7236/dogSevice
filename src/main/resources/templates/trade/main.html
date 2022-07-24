@@ -75,25 +75,33 @@
     </div>
 </header>
 <!-- Section-->
-<table>
+<section class="py-4">
+    <div class="container px-4 px-lg-5 mt-5">
+<table th:width="1000">
     <tr>
+        <th>구매자ID</th>
         <th>거래번호</th>
         <th>간식이름</th>
         <th>간식이미지</th>
         <th>간식가격</th>
         <th>회사번호</th>
+        <th>취소</th>
 
     </tr>
-    <tr th:each="food: ${pagingList}">
-        <td><a th:value="${food.TIdnum}"></a></td>
-        <td><a th:value="${food.FTitle}"></a></td>
-        <td><img th:src="@{/image/}+${food.FImagefilename}" th:width="150" th:height="190" th:alt="이미지오류"></td>
-        <td><a th:value="${food.FCost}"></a></td>
-        <td><a th:value="${food.FPhonenum}"></a></td>
-        <td><a th:text="삭제" th:href="@{|/trade/delete/${food.TIdnum}|}"></a></td>
+    <div th:each="trade: ${tList}">
+    <tr>
+        <td><a th:text="${trade.MMemberEntity.MIdnum}"></a></td>
+        <td><a th:text="${trade.TIdnum}"></a></td>
+        <td><a th:text="${trade.FTitle}"></a></td>
+        <td><image th:src="@{/image/}+${trade.fImagefilename}" th:width="150" th:height="190" th:alt="이미지오류"></td>
+        <td><a th:text="${trade.FCost}"></a></td>
+        <td><a th:text="${trade.FPhonenum}"></a></td>
+        <td><a th:text="삭제" th:href="@{|/trade/delete/${trade.TIdnum}|}"></a></td>
     </tr>
-
+    </div>
 </table>
+    </div>
+</section>
 <!-- Footer-->
 <footer class="my-4 py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>

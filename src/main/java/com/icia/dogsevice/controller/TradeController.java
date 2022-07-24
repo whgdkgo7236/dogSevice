@@ -24,9 +24,9 @@ public class TradeController {
 
     @PostMapping("save")
     public String save(@RequestParam(value = "FIdnum") Long FIdnum){
-        System.out.println("fIdnum = " + FIdnum);
+
         FoodDetailDTO foodDTO =fs.findByIdnum(FIdnum);
-        System.out.println("TradeController food = "+ foodDTO);
+
         ts.save(TradeSaveDTO.toDTOChange(foodDTO));
         return "redirect:/food/main";
     }
@@ -36,14 +36,24 @@ public class TradeController {
         model.addAttribute("sessionid",sessionid);
 
         Page<TradePagingDTO> pagingList =ts.paging(pageable);
-        System.out.println("trade들어옴");
-        model.addAttribute("pagingList",pagingList);
+
+        System.out.println("pagingListt = " +pagingList.toList());
+        model.addAttribute("tList",pagingList);
+
         return "/trade/main";
     }
     @GetMapping("delete/{tIdnum}")
     public String delete(@PathVariable Long tIdnum){
         System.out.println("tid = "+tIdnum);
         ts.deleteId(tIdnum);
-        return "redirect:/trade/main";
+        String return_address=null;
+        if(ms.getSessionId().equals("admin")){
+            return_address= "redirect:/trade/main";
+        }
+        else{
+            return_address= "redirect:/trade/trade";
+        }
+        return return_address;
     }
+
 }

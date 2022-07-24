@@ -34,7 +34,7 @@
                 </button>
             </form>
             <form class="d-mylist" name="myitemlist-btn" action="/member/trade" method="get">
-                <button class="btn btn-outline-dark"  onclick="mylist_btn()">
+                <button class="btn btn-outline-dark" id="tradeList_btn" onclick="mylist_btn()">
                     <i class="bi-cart-fill me-1"></i>
                     장바구니
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
@@ -148,6 +148,7 @@
 <script>
     const member_btn = document.getElementById("member_btn");
     const save_btn = document.getElementById("save_btn");
+    const tradeList_btn = document.getElementById("tradeList_btn");
 
     const session_id= "[[${sessionid}]]";
     const additem_btn = document.getElementById("additem_btn");
@@ -159,17 +160,21 @@
             member_btn.innerHTML = "로그인";
             save_btn.style.visibility = "visible";
             save_btn.innerHTML ="회원가입";
-             additem_btn.style.visibility = "hidden";
+            additem_btn.style.visibility = "hidden";
+            tradeList_btn.innerHTML = "장바구니";
     }else{
 
         member_btn.style.visibility = "visible";
         member_btn.innerHTML = "로그아웃";
         save_btn.style.visibility = "hidden";
         save_btn.innerHTML = "회원가입";
+
         if(session_id=="admin"){
             additem_btn.style.visibility="visible";
+            tradeList_btn.innerHTML="거래내역";
         }else{
             additem_btn.style.visibility="hidden";
+            tradeList_btn.innerHTML="장바구니";
         }
     }
 
@@ -196,7 +201,12 @@
         location.href="/food/main";
     }
     function mylist_btn(){
-        myitemlist-btn.submit();
+        if(session_id=="admin"){
+            location.href="/trade/main";
+        }else{
+            myitemlist-btn.submit();
+        }
+
     }
 </script>
 </html>

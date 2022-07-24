@@ -1,5 +1,6 @@
 package com.icia.dogsevice.dto;
 
+import com.icia.dogsevice.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,5 @@ public class TradePagingDTO {
 
     private String fImagefilename;
     private String fImagefilepath;
+    private MemberEntity mMemberEntity;
 }

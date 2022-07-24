@@ -1,9 +1,6 @@
 package com.icia.dogsevice.controller;
 
-import com.icia.dogsevice.dto.MemberDetailDTO;
-import com.icia.dogsevice.dto.MemberLoginDTO;
-import com.icia.dogsevice.dto.MemberSaveDTO;
-import com.icia.dogsevice.dto.TradeListDTO;
+import com.icia.dogsevice.dto.*;
 import com.icia.dogsevice.service.FoodService;
 import com.icia.dogsevice.service.MemberService;
 import com.icia.dogsevice.service.TradeService;
@@ -39,7 +36,7 @@ public class MemberController {
 
     @PostMapping("save")
     public String saveMember(@ModelAttribute MemberSaveDTO memberSaveDTO, HttpSession session, RedirectAttributes redirectAttributes){
-        System.out.println("memberSaveDTO = " + memberSaveDTO );
+
         Long memberid=ms.save(memberSaveDTO);
         return "/member/login";
     }
@@ -48,9 +45,9 @@ public class MemberController {
 
     @PostMapping("login")
     public String login(@ModelAttribute MemberLoginDTO memberLoginDTO,Model model) {
-        System.out.println("로그인들어옴 " + memberLoginDTO);
+
         String address = ms.findBymId(memberLoginDTO);
-        System.out.println("address = " + address);
+
         if(address == "index"){
             model.addAttribute("sessionid",ms.getSessionId());
             return "index";
@@ -68,31 +65,48 @@ public class MemberController {
     public String detailForm(Model model){
         MemberDetailDTO DTO=ms.findBySessionid();
         model.addAttribute("detailDTO",DTO);
+        model.addAttribute("sessionid",ms.getSessionId());
 
-        System.out.println("들어옴");
+
         return "/member/detail";
     }
     @PostMapping("detail")
     public String detailSave(@ModelAttribute MemberDetailDTO detailDTO,Model model){
         model.addAttribute("sessionid",ms.getSessionId());
         Long memberId = ms.saveDetail(detailDTO);
+        model.addAttribute("sessionid",ms.getSessionId());
 
 
         return "index";
     }
 
     @GetMapping("trade")
-    public String myfood(Model model){
-        System.out.println("맴버컨트롤 ");
-        List<TradeListDTO> tList= ts.findAllListbyId();
-        System.out.println("tList = "+tList);
-        model.addAttribute("tList",tList);
+    public String myfood(Model model,@PageableDefault(page =1)Pageable pageable){
+        model.addAttribute("sessionid",ms.getSessionId());
+        if(ms.findBySessionid().getMId().equals("admin")){
+            Page<TradePagingDTO> tpaging= ts.paging(pageable);
+
+            model.addAttribute("tList",tpaging);
+            model.addAttribute("tCost","0");
+            model.addAttribute("member",ms.findBySessionid());
+            return "/trade/main";
+
+        }
+        else{
+            List<TradeListDTO> tList= ts.findAllListbyId();
+            model.addAttribute("tList",tList);
+            int totalCost = 0;
+            for(int i=0 ; i<tList.size();i++){
+                totalCost+= Integer.parseInt(tList.get(i).getFCost());
+            }
+            model.addAttribute("tCost",totalCost);
+
+            model.addAttribute("member",ms.findBySessionid());
+
+            return "/member/myfood";
+        }
 
 
-
-        //List<TradeListDTO> list= ts.findAllListbyId(ms.getSessionId());
-        //System.out.println(list);
-        return "/member/myfood";
     }
 
 

@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Long save(MemberSaveDTO memberSaveDTO) {
-        System.out.println("memberSaveDTO = " + memberSaveDTO.toString());
+
 
         return mr.save(MemberEntity.toSaveEntity(memberSaveDTO)).getMIdnum();
     }
@@ -35,16 +35,14 @@ public class MemberServiceImpl implements MemberService{
         String result;
         MemberEntity memberEntity = mr.findBymId(memberLoginDTO.getMId());
         MemberLoginDTO loginDTO =MemberLoginDTO.toLoginDTO(memberEntity);
-        System.out.println("LoginDTO = " +loginDTO );
         if((memberLoginDTO.getMId().equals(loginDTO.getMId()))&&(memberLoginDTO.getMPassword().equals(loginDTO.getMPassword()))){
-            System.out.println("login  성공");
+
             session.setAttribute("id",memberLoginDTO.getMId());
             session.setAttribute("password",memberLoginDTO.getMPassword());
             result = "index";
         }else{
             result = "login";
         }
-        System.out.println("id = " +loginDTO.getMId() + "     " + memberLoginDTO.getMId()+" 비밀번호    " +memberLoginDTO.getMPassword()+ "   " +loginDTO.getMPassword());
         return result;
     }
 
@@ -52,7 +50,7 @@ public class MemberServiceImpl implements MemberService{
     public MemberDetailDTO findBySessionid() {
         MemberEntity memberEntity = mr.findBymId((String)session.getAttribute("id"));
         MemberDetailDTO memberDetailDTO = MemberDetailDTO.todetailDTO(memberEntity);
-        System.out.println(memberDetailDTO);
+
         return memberDetailDTO;
     }
 

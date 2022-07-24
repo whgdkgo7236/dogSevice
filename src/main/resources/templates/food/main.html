@@ -26,13 +26,7 @@
                 <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="shopping_btn()">쇼핑</a></li>
 
             </ul>
-            <form class="d-trade check" name="tradeitem-btn" action="/trade/" method="get">
-                <button class="btn btn-outline-dark" id="trademain_btn" onclick="tradeform_btn()">
-                    <i class="bi-cart-fill me-1"></i>
-                    물품결제
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
+
             <form class="d-shop item" name="addshopitem-btn" action="/food/save" method="get">
                 <button class="btn btn-outline-dark" id="additem_btn" onclick="saveitem_btn()">
                     <i class="bi-cart-fill me-1"></i>
@@ -40,6 +34,15 @@
                     <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
             </form>
+
+            <form class="d-mylist" name="myitemlist-btn" action="/member/trade" method="get">
+                <button class="btn btn-outline-dark" id="tradeList_btn" onclick="mylist_btn()">
+                    <i class="bi-cart-fill me-1"></i>
+                    장바구니
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+
             <form class="d-flex" name="detail_btn" action="/member/detail" method="get">
                 <button class="btn btn-outline-dark" onclick="detail_btn()">
                     <i class="bi-cart-fill me-1"></i>
@@ -152,7 +155,7 @@
 <script>
     const member_btn = document.getElementById("member_btn");
     const save_btn = document.getElementById("save_btn");
-    const trade_btn = document.getElementById("trademain_btn");
+    const tradeList_btn = document.getElementById("tradeList_btn");
 
     const session_id= "[[${sessionid}]]";
     const additem_btn = document.getElementById("additem_btn");
@@ -164,20 +167,20 @@
         save_btn.style.visibility = "visible";
         save_btn.innerHTML ="회원가입";
         additem_btn.style.visibility = "hidden";
-        trade_btn.style.visibility = "hidden";
+        tradeList_btn.innerHTML = "장바구니";
     }else{
 
         member_btn.style.visibility = "visible";
         member_btn.innerHTML = "로그아웃";
         save_btn.style.visibility = "hidden";
         save_btn.innerHTML = "회원가입";
-        trade_btn.style.visibility = "hidden";
+
         if(session_id=="admin"){
             additem_btn.style.visibility="visible";
-            trade_btn.style.visibility = "visible";
+            tradeList_btn.innerHTML="거래내역";
         }else{
             additem_btn.style.visibility="hidden";
-            trade_btn.style.visibility = "hidden";
+            tradeList_btn.innerHTML="장바구니";
         }
     }
 
@@ -203,8 +206,13 @@
         console.log("쇼핑버튼");
         location.href="/food/main";
     }
-    function tradeform_btn(){
-        tradeitem-btn.submit();
+    function mylist_btn(){
+        if(session_id=="admin"){
+            location.href="/trade/main";
+        }else{
+            myitemlist-btn.submit();
+        }
+
     }
 </script>
 </html>

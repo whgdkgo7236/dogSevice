@@ -34,7 +34,7 @@ public class FoodServiceImpl implements FoodService{
         foodSaveDTO.setFImagefilename(System.currentTimeMillis()+"_"+foodSaveDTO.getFImagefilename());
         foodSaveDTO.setFImagefilepath("C:\\code\\dogSevice\\src\\main\\resources\\static\\image\\"+foodSaveDTO.getFImagefilename());
 
-        System.out.println(" service foodSaveDTO = " + foodSaveDTO);
+
         if(!file.isEmpty()){
             file.transferTo(new File(foodSaveDTO.getFImagefilepath()));
         }
